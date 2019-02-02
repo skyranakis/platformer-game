@@ -101,7 +101,7 @@ public class Player implements Agent
   
   //Causes it to jump
   public void jump(){
-    if (isOnGround && !isDazed){
+    if (isOnGround && !isDazed && !isCharging){
       vY = 20;
       endDuck();
     }
