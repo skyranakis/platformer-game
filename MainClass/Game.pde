@@ -13,6 +13,7 @@ public class Game
   
   //Main game loop
   public void gameLoop(){
+    delay(20);
     drawMap();
     int stepResult = player.step();
     player.drawAgent();
@@ -29,6 +30,18 @@ public class Game
         player.goRight();
       }else if (keyCode == LEFT){
         player.goLeft();
+      }else if (keyCode == DOWN){
+        player.duck();
+      }else if (keyCode == SHIFT){
+        player.charge();
+      }
+    }
+  }
+  
+  public void handleKeyRelease(){
+    if (key == CODED){
+      if (keyCode == DOWN){
+        player.endDuck();
       }
     }
   }

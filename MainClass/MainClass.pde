@@ -14,3 +14,7 @@ void draw(){
 void keyPressed(){
   g.handleKeyPress();
 }
+
+void keyReleased(){
+  g.handleKeyRelease();
+}
