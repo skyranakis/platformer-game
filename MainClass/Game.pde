@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Game
 {
   
-  private int x;
   private Player player;
   private ArrayList<Agent> enemies;
   private boolean hasWon;
   private boolean hasLost;
+  private Terrain terrain;
   
   public Game(){
-    x = 0;
-    player = new Player();
+    terrain = new Terrain();
+    player = new Player(terrain);
     enemies = new ArrayList();
     enemies.add(new BasicEnemy());
     hasWon = false;
@@ -28,7 +28,7 @@ public class Game
     }else if (hasLost){
       drawLossMessage();
     }else{
-      drawMap();
+      terrain.drawTerrain();
       for (Agent a : enemies){
         a.step();
         a.drawAgent();
@@ -71,14 +71,6 @@ public class Game
         player.endDuck();
       }
     }
-  }
-  
-  //Draws the map
-  public void drawMap(){
-    background(255);
-    fill(0, 0, 0);
-    stroke(0, 0, 0);
-    rect(0, 300, width, height-300);
   }
   
   //Draws the message as the result of a win
