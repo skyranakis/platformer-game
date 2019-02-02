@@ -27,7 +27,23 @@ public class Terrain
         MAP[r][c] = "Open";
       }
     }
-    
+    createPlatform(100, 20, 300);
+    createPlatform(150, 200, 30);
+    createPlatform(650, 200, 400);
+  }
+  
+  public void createPlatform(int startX, int startY, int len){
+    int platStart = startX / BOX_WIDTH;
+    int platHeight = startY / BOX_HEIGHT;
+    int platLength = len / BOX_WIDTH;
+    print(platStart+" "+platHeight+" "+platLength);
+    int platEnd = platStart + platLength;
+    if (platEnd > NUM_HORIZ_BOXES){
+      platEnd = NUM_HORIZ_BOXES;
+    }
+    for (int i = platStart; i < platEnd; i++){
+      MAP[platHeight][i] = "Ground";
+    }
   }
   
   public boolean isInAir(Agent a){
