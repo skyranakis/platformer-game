@@ -37,7 +37,7 @@ public class Player implements Agent
     chargeCounter = -1;
     
     GRAVTIY = -1;
-    USUALVX = 2;
+    USUALVX = 8;
     DUCKSHRINKAMOUNT = 100;
     CHARGEAMOUNT = 3;
     CHARGETIME = 40;
@@ -97,6 +97,35 @@ public class Player implements Agent
     }
     
     return 0;
+  }
+  
+  //Returns position with row denoting vertex, ordered clockwise from top left, and columns denoting x and y
+  //Note: charging doesn't actually tilt the agent
+  public int[][] getPosition(){
+    int[][] position = new int[4][2];
+    position[0][0] = x;
+    position[0][1] = y;
+    position[1][0] = x+pWidth;
+    position[1][1] = y;
+    position[2][0] = x;
+    position[2][1] = y+pHeight;
+    position[3][0] = x+pWidth;
+    position[3][1] = y+pHeight;
+    return position;
+  }
+  
+  //Determines if the player collides with the other agent
+  public boolean collidesWith(Agent a){
+    int[][] agentPos = a.getPosition();
+    int agentLeft = agentPos[0][0];
+    int agentRight = agentPos[1][0];
+    int agentTop = agentPos[0][1];
+    int agentBottom = agentPos[2][1];
+    int playerLeft = x;
+    int playerRight = x+pWidth;
+    int playerTop = y;
+    int playerBottom = y-pHeight;
+    return (agentRight >= playerLeft && agentLeft <= playerRight && agentBottom <= playerTop && agentTop >= playerBottom);
   }
   
   //Causes it to jump
