@@ -15,7 +15,10 @@ public class Game
     terrain = new Terrain();
     player = new Player(terrain);
     enemies = new ArrayList();
-    enemies.add(new BasicEnemy());
+    enemies.add(new BasicEnemy(150, 10));
+    enemies.add(new BasicEnemy(450, 10));
+    enemies.add(new BasicEnemy(650, 20));
+    enemies.add(new BasicEnemy(900, 10));
     hasWon = false;
     hasLost = false;
   }
@@ -47,6 +50,10 @@ public class Game
         hasWon = true;
       }
     }
+  }
+  
+  public boolean isGameOver(){
+    return (hasWon || hasLost);
   }
   
   public void handleKeyPress(){

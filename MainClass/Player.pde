@@ -33,23 +33,23 @@ public class Player implements Agent
   
   public Player(Terrain t){
     
-    x = 100;
-    y = 200;
+    x = 50;
+    y = 10;
     vX = 0;
     vY = 0;
     
     chargeCounter = -1;
     
-    GRAVTIY = -1;
-    JUMPAMOUNT = 20;
-    USUALVX = 8;
-    DUCKSHRINKAMOUNT = 101;
+    GRAVTIY = -0.5;
+    JUMPAMOUNT = 5;
+    USUALVX = 3;
+    DUCKSHRINKAMOUNT = 0.49;
     CHARGEAMOUNT = 3;
     CHARGETIME = 20;
     DAZETIME = 50;    //Always: DAZETIME > CHARGETIME * (CHARGEAMOUNT - 1)
     
-    pWidth = 100;
-    pHeight = 200;
+    pWidth = 10;
+    pHeight = 20;
     
     hasWon = false;
     inAir = false;
@@ -136,7 +136,7 @@ public class Player implements Agent
   
   //Handles landing
   private void land(){
-    y = 200; //Fix later
+    y = 10; //Fix later
     vY = 0;
     inAir = false;
   }
@@ -159,7 +159,7 @@ public class Player implements Agent
   public void duck(){
     if (!inAir && !dazed && !charging && !ducking){
       ducking = true;
-      pHeight -= DUCKSHRINKAMOUNT;
+      pHeight *= DUCKSHRINKAMOUNT;
     }
   }
   
@@ -167,7 +167,7 @@ public class Player implements Agent
   public void endDuck(){
     if (ducking){
       ducking = false;
-      pHeight += DUCKSHRINKAMOUNT;
+      pHeight /= DUCKSHRINKAMOUNT;
     }
   }
   

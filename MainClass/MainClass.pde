@@ -11,6 +11,13 @@ void draw(){
   g.gameLoop();
 }
 
+//Restarts game
+void mousePressed(){
+  if (g.isGameOver()){
+    g = new Game();
+  }
+}
+
 void keyPressed(){
   g.handleKeyPress();
 }

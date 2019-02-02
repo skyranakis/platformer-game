@@ -15,18 +15,17 @@ public class Terrain
     
     MAP_WIDTH = width;
     MAP_HEIGHT = height;
-    NUM_HORIZ_BOXES = 10;
-    NUM_VERT_BOXES = 5;
+    NUM_HORIZ_BOXES = 100;
+    NUM_VERT_BOXES = 50;
     BOX_WIDTH = MAP_WIDTH / NUM_HORIZ_BOXES;
     BOX_HEIGHT = MAP_HEIGHT / NUM_VERT_BOXES;
     
     MAP = new String[NUM_VERT_BOXES][NUM_HORIZ_BOXES];
     for (int c = 0; c < MAP[0].length; c++){
       MAP[0][c] = "Ground";
-      MAP[1][c] = "Ground";
-      MAP[2][c] = "Open";
-      MAP[3][c] = "Open";
-      MAP[4][c] = "Open";
+      for (int r = 1; r < MAP.length; r++){
+        MAP[r][c] = "Open";
+      }
     }
     
   }

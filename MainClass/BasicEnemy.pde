@@ -7,10 +7,18 @@ public class BasicEnemy implements Agent
   private boolean hidden;
   
   public BasicEnemy(){
-    x = 400;
-    y = 200;
-    aWidth = 100;
-    aHeight = 100;
+    x = 0;
+    y = 0;
+    aWidth = 10;
+    aHeight = 10;
+    hidden = false;
+  }
+  
+  public BasicEnemy(int xPos, int yPos){
+    x = xPos;
+    y = yPos;
+    aWidth = 10;
+    aHeight = 10;
     hidden = false;
   }
   
