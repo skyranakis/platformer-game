@@ -136,7 +136,7 @@ public class Player implements Agent
   
   //Handles landing
   private void land(){
-    y = 10; //Fix later
+    y = terrain.getLandingHeight(this);
     vY = 0;
     inAir = false;
   }

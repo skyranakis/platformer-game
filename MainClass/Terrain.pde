@@ -36,7 +36,6 @@ public class Terrain
     int platStart = startX / BOX_WIDTH;
     int platHeight = startY / BOX_HEIGHT;
     int platLength = len / BOX_WIDTH;
-    print(platStart+" "+platHeight+" "+platLength);
     int platEnd = platStart + platLength;
     if (platEnd > NUM_HORIZ_BOXES){
       platEnd = NUM_HORIZ_BOXES;
@@ -58,6 +57,27 @@ public class Terrain
       }
     }
     return true;
+  }
+  
+  //Gives the height of the top of the platform that the agent has just landed on
+  public int getLandingHeight(Agent a){
+    int[][] aPos = a.getPosition();
+    int startX = aPos[2][0];
+    int endX = aPos[3][0];
+    int bottomY = aPos[2][1];
+    boolean onGround = true;
+    while(onGround){
+      onGround = false;
+      for (int x = startX; x < endX; x++){
+        if (typeAt(x, bottomY).equals("Ground")){
+          onGround = true;
+        }
+      }
+      bottomY += BOX_HEIGHT;
+    }
+    bottomY -= BOX_HEIGHT;
+    int topOfBox = ((int)(bottomY / BOX_HEIGHT)) * BOX_HEIGHT;
+    return topOfBox;
   }
   
   public String typeAt(int x, int y){
