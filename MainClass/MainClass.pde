@@ -10,3 +10,7 @@ void setup(){
 void draw(){
   g.gameLoop();
 }
+
+void keyPressed(){
+  g.handleKeyPress();
+}

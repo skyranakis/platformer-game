@@ -7,6 +7,7 @@ public class Player implements Agent
   private double vX;
   private double vY;
   private double gravity;
+  private double usualVX;
   
   private int pWidth;
   private int pHeight;
@@ -15,11 +16,12 @@ public class Player implements Agent
   private boolean isOnGround;
   
   public Player(){
-    x = 0;
+    x = 100;
     y = 400;
-    vX = 5;
+    vX = 0;
     vY = 0;
     gravity = -1;
+    usualVX = 1;
     pWidth = 100;
     pHeight = 200;
     hasWon = false;
@@ -44,9 +46,9 @@ public class Player implements Agent
     }
     
     //Temporary
-    if (x == 150 || x == 270 || x == 300 || x == 850){
-      jump();
-    }
+    //if (x == 150 || x == 270 || x == 300 || x == 850){
+      //jump();
+    //}
     
     if (x >= 900){
       hasWon = true;
@@ -58,10 +60,21 @@ public class Player implements Agent
     return 0;
   }
   
+  //Causes it to jump
   public void jump(){
     if (isOnGround){
       vY = 20;
     }
+  }
+  
+  //Causes it to go right at the usual speed
+  public void goRight(){
+    vX = usualVX;
+  }
+  
+  //Causes it to go right at the usual speed
+  public void goLeft(){
+    vX = -usualVX;
   }
   
   //Draws the agent

@@ -21,6 +21,18 @@ public class Game
     }
   }
   
+  public void handleKeyPress(){
+    if (key == CODED){
+      if (keyCode == UP){
+        player.jump();
+      }else if (keyCode == RIGHT){
+        player.goRight();
+      }else if (keyCode == LEFT){
+        player.goLeft();
+      }
+    }
+  }
+  
   //Draws the map
   public void drawMap(){
     background(255);
