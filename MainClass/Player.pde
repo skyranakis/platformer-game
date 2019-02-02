@@ -26,6 +26,7 @@ public class Player implements Agent
   private boolean isCharging;
   private boolean chargeSuccessful;
   private boolean isDazed;
+  private boolean hidden;
   
   public Player(){
     
@@ -40,8 +41,8 @@ public class Player implements Agent
     USUALVX = 8;
     DUCKSHRINKAMOUNT = 100;
     CHARGEAMOUNT = 3;
-    CHARGETIME = 40;
-    DAZETIME = 100;    //Always: DAZETIME > CHARGETIME * (CHARGEAMOUNT - 1)
+    CHARGETIME = 20;
+    DAZETIME = 50;    //Always: DAZETIME > CHARGETIME * (CHARGEAMOUNT - 1)
     
     pWidth = 100;
     pHeight = 200;
@@ -52,6 +53,7 @@ public class Player implements Agent
     isCharging = false;
     chargeSuccessful = false;
     isDazed = false;
+    hidden = false;
   }
   
   //Handles one timestep
@@ -76,9 +78,6 @@ public class Player implements Agent
     dazeCounter--;
     if (chargeCounter == 0){
       endCharge();
-      if (!chargeSuccessful){
-        startDaze();
-      }
     }
     if (dazeCounter == 0){
       endDaze();
@@ -89,7 +88,7 @@ public class Player implements Agent
       //jump();
     //}
     
-    if (x >= 900){
+    if (x+pWidth >= 1000){
       hasWon = true;
     }
     if (hasWon){
@@ -116,6 +115,9 @@ public class Player implements Agent
   
   //Determines if the player collides with the other agent
   public boolean collidesWith(Agent a){
+    if (a.getHidden()){
+      return false;
+    }
     int[][] agentPos = a.getPosition();
     int agentLeft = agentPos[0][0];
     int agentRight = agentPos[1][0];
@@ -174,15 +176,31 @@ public class Player implements Agent
       isCharging = true;
       vX *= CHARGEAMOUNT;
       chargeCounter = CHARGETIME;
+      chargeSuccessful = false;
       endDuck();
     }
   }
   
-   //Causes it to end charge
+  //Causes it to end charge
   public void endCharge(){
     if (isCharging){
       isCharging = false;
       vX /= CHARGEAMOUNT;
+      if (!chargeSuccessful){
+        startDaze();
+      }
+    }
+  }
+  
+  //Returns true if the player is attacking
+  public boolean isAttacking(){
+    return isCharging;
+  }
+  
+  //Lets the player know that is has hit an enemy
+  public void rewardForHit(){
+    if (isCharging){
+      chargeSuccessful = true;
     }
   }
   
@@ -239,6 +257,14 @@ public class Player implements Agent
     stroke(255, 0, 0);
     fill(255, 0, 0);
     rect(x, height-y, 100, 200);
+  }
+  
+  public boolean getHidden(){
+    return hidden;
+  }
+  
+  public void hide(){
+    hidden = true;
   }
   
 }

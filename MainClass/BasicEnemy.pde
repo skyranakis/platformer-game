@@ -4,12 +4,14 @@ public class BasicEnemy implements Agent
   private int y;
   private int aWidth;
   private int aHeight;
+  private boolean hidden;
   
   public BasicEnemy(){
     x = 400;
     y = 300;
     aWidth = 100;
     aHeight = 100;
+    hidden = false;
   }
   
   public int step(){
@@ -17,9 +19,11 @@ public class BasicEnemy implements Agent
   }
   
   public void drawAgent(){
-    stroke(255, 0, 255);
-    fill(255, 0, 255);
-    rect(x, height-y, aWidth, aHeight);
+    if (!hidden){
+      stroke(255, 0, 255);
+      fill(255, 0, 255);
+      rect(x, height-y, aWidth, aHeight);
+    }
   }
   
   //Returns position with row denoting vertex, ordered clockwise from top left, and columns denoting x and y
@@ -34,6 +38,14 @@ public class BasicEnemy implements Agent
     position[3][0] = x+aWidth;
     position[3][1] = y+aHeight;
     return position;
+  }
+  
+  public boolean getHidden(){
+    return hidden;
+  }
+  
+  public void hide(){
+    hidden = true;
   }
   
 }

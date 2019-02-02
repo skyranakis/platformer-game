@@ -33,7 +33,12 @@ public class Game
         a.step();
         a.drawAgent();
         if (player.collidesWith(a)){
-          hasLost = true;
+          if (player.isAttacking()){
+            a.hide();
+            player.rewardForHit();
+          }else{
+            hasLost = true;
+          }
         }
       }
       int stepResult = player.step();
